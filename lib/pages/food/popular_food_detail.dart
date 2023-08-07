@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/widget/app_column.dart';
 import 'package:food_delivery/widget/app_icon.dart';
+import 'package:food_delivery/widget/expandable_text_widget.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
@@ -14,6 +15,7 @@ class PopularFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Container(
@@ -46,9 +48,77 @@ class PopularFoodDetail extends StatelessWidget {
                     topLeft: Radius.circular(Dimensions.calc(20)),
                     topRight: Radius.circular(Dimensions.calc(20))),
                 color: Colors.white),
-            child: AppColumn(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppColumn(text: 'Biriani'),
+                SizedBox(
+                  height: Dimensions.calc(20),
+                ),
+                BigText(text: 'Introduce'),
+                SizedBox(
+                  height: Dimensions.calc(20),
+                ),
+                const Expanded(
+                  child: SingleChildScrollView(
+                      child: ExpandableTextWidget(
+                          text:
+                              'sjkxbsijkxbskjx jdhsij jkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxsjkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxsjkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxsvvvvvjkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxskcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxs')),
+                )
+              ],
+            ),
           )
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: Dimensions.calc(120),
+        padding: EdgeInsets.all(Dimensions.calc(20)),
+        decoration: BoxDecoration(
+            color: AppColors.buttonBackgroundColor,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.calc(40)),
+                topRight: Radius.circular(Dimensions.calc(40)))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: EdgeInsets.all(Dimensions.calc(20)),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(Dimensions.calc(20)))),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.remove,
+                    color: AppColors.signColor,
+                  ),
+                  SizedBox(
+                    width: Dimensions.calcW(5),
+                  ),
+                  BigText(
+                    text: '0',
+                  ),
+                  SizedBox(
+                    width: Dimensions.calcW(5),
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: AppColors.signColor,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(Dimensions.calc(20)),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(Dimensions.calc(20)))),
+              child: BigText(text: '\$10 | Add to cart'),
+            ),
+          ],
+        ),
       ),
     );
   }
