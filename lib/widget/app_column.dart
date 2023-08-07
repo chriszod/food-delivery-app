@@ -17,14 +17,12 @@ class AppColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BigText(
             text: text,
             size: Dimensions.calc(26),
-          ),
-          SizedBox(
-            height: Dimensions.calc(10),
           ),
           Row(
             children: [
@@ -50,9 +48,6 @@ class AppColumn extends StatelessWidget {
               ),
               SmallText(text: 'comments'),
             ],
-          ),
-          SizedBox(
-            height: Dimensions.calc(20),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

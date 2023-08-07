@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/widget/app_column.dart';
 import 'package:food_delivery/widget/app_icon.dart';
-import 'package:food_delivery/widget/expandable_text_widget.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widget/big_text.dart';
-import '../../widget/icon_and_text_widget.dart';
-import '../../widget/small_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   const PopularFoodDetail({Key? key}) : super(key: key);
@@ -51,7 +49,11 @@ class PopularFoodDetail extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppColumn(text: 'Biriani'),
+                Container(
+                    height: Dimensions.calc(100),
+                    child: AppColumn(
+                      text: 'Biriani',
+                    )),
                 SizedBox(
                   height: Dimensions.calc(20),
                 ),
@@ -59,12 +61,29 @@ class PopularFoodDetail extends StatelessWidget {
                 SizedBox(
                   height: Dimensions.calc(20),
                 ),
-                const Expanded(
+                Expanded(
                   child: SingleChildScrollView(
-                      child: ExpandableTextWidget(
-                          text:
-                              'sjkxbsijkxbskjx jdhsij jkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxsjkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxsjkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxsvvvvvjkxbsijkxbskjx jdhsijkcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxskcbnsijkchnsijcksnc sikcjmsnc sikc scsciksm css csic sc sicjs cisk csick scissbxsjkbxs')),
-                )
+                    child: ReadMoreText(
+                      'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
+                      trimLines: 10,
+                      style: TextStyle(
+                          color: AppColors.paraColor,
+                          fontSize: Dimensions.calc(12),
+                          fontWeight: FontWeight.w400),
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: 'Show more',
+                      trimExpandedText: 'Show less',
+                      moreStyle: TextStyle(
+                          fontSize: Dimensions.calc(14),
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.mainColor),
+                      lessStyle: TextStyle(
+                          fontSize: Dimensions.calc(14),
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.mainColor),
+                    ),
+                  ),
+                ),
               ],
             ),
           )
