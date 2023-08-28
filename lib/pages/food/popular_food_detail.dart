@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/popular_product_controller.dart';
+import 'package:food_delivery/pages/home/main_food_page.dart';
+import 'package:food_delivery/route/route_helper.dart';
 import 'package:food_delivery/widget/app_column.dart';
 import 'package:food_delivery/widget/app_icon.dart';
+import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widget/big_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -21,7 +29,9 @@ class PopularFoodDetail extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/image/food0.png')),
+                  image: NetworkImage(AppConstants.BASE_URL +
+                      AppConstants.UPLOAD +
+                      product.img)),
             ),
           ),
           Container(
@@ -32,7 +42,11 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
+                GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.initial);
+                    },
+                    child: AppIcon(icon: Icons.arrow_back_ios)),
                 AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             ),
@@ -52,7 +66,7 @@ class PopularFoodDetail extends StatelessWidget {
                 Container(
                     height: Dimensions.calc(100),
                     child: AppColumn(
-                      text: 'Biriani',
+                      text: product.name,
                     )),
                 SizedBox(
                   height: Dimensions.calc(20),
@@ -64,7 +78,7 @@ class PopularFoodDetail extends StatelessWidget {
                 Expanded(
                   child: SingleChildScrollView(
                     child: ReadMoreText(
-                      'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase. Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
+                      product.description,
                       trimLines: 10,
                       style: TextStyle(
                           color: AppColors.paraColor,
@@ -131,10 +145,12 @@ class PopularFoodDetail extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(Dimensions.calc(20)),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.mainColor,
                   borderRadius:
                       BorderRadius.all(Radius.circular(Dimensions.calc(20)))),
-              child: BigText(text: '\$10 | Add to cart'),
+              child: BigText(
+                  color: Colors.white,
+                  text: '\$${product.price} | Add to cart'),
             ),
           ],
         ),
