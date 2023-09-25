@@ -31,7 +31,6 @@ class CartController extends GetxController {
       if (totalQuantity <= 0) {
         _item.remove(product.id);
       }
-    
     } else {
       if (quantity > 0) {
         _item.putIfAbsent(product.id!, () {
@@ -70,5 +69,19 @@ class CartController extends GetxController {
     }
 
     return quantity;
+  }
+
+  int get totalItems {
+    var totalQuantity = 0;
+    _item.forEach((key, value) {
+      totalQuantity += value.quantity!;
+    });
+    return totalQuantity;
+  }
+
+  List<CartModel> get getItems {
+    return _item.entries.map((e) {
+      return e.value;
+    }).toList();
   }
 }
