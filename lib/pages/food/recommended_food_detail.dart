@@ -13,15 +13,16 @@ import '../../utils/dimensions.dart';
 import '../cart/cart_page.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  int pageId;
-  RecommendedFoodDetail({Key? key, required this.pageId}) : super(key: key);
+  final int pageId;
+
+  RecommendedFoodDetail({Key? key, required this.pageId, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var product =
         Get.find<RecommendedProductController>().recommendedProductList[pageId];
-        Get.find<PopularProductController>()
-        .initProduct(product,Get.find<CartController>());
+    Get.find<PopularProductController>()
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -33,43 +34,47 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Get.toNamed(RouteHelper.initial);
+                      
                     },
                     child: AppIcon(icon: Icons.clear)),
-                GetBuilder<PopularProductController>(
-                  builder: (controller) {
-                    return GestureDetector(
-                       onTap: () {
-                            Get.to(() => CartPage());
-                          },
-                      child: Stack(
-                        children: [
-                          AppIcon(icon: Icons.shopping_cart_outlined),
-                          Get.find<PopularProductController>().totalItems>=1?
-                          Positioned(
-                            right: 0, top: 0,
-                            child: AppIcon(
-                              icon: Icons.circle,
-                              size: Dimensions.calc(20).toInt(),
-                              iconColor: Colors.transparent, 
-                              backgroundColor: AppColors.mainColor,),
-                          ):
-                          Container(),
-                          Get.find<PopularProductController>().totalItems>=1?
-                          Positioned(
-                            right: 3, top: 3,
-                            child: BigText(
-                              text:Get.find<PopularProductController>().totalItems.toString(),
-                              size: Dimensions.calc(12),
-                              color: Colors.white,
-                            )
-                          ):
-                          Container()
-                        ],
-                        ),
-                    );
-                  }
-                )
+                GetBuilder<PopularProductController>(builder: (controller) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (controller.totalItems >= 1) {
+                        Get.toNamed(RouteHelper.cartPage);
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        controller.totalItems >= 1
+                            ? Positioned(
+                                right: 0,
+                                top: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: Dimensions.calc(20).toInt(),
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: AppColors.mainColor,
+                                ),
+                              )
+                            : Container(),
+                        controller.totalItems >= 1
+                            ? Positioned(
+                                right: 3,
+                                top: 3,
+                                child: BigText(
+                                  text: Get.find<PopularProductController>()
+                                      .totalItems
+                                      .toString(),
+                                  size: Dimensions.calc(12),
+                                  color: Colors.white,
+                                ))
+                            : Container()
+                      ],
+                    ),
+                  );
+                })
               ],
             ),
             bottom: PreferredSize(
