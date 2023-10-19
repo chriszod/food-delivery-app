@@ -69,7 +69,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             dotsCount: popularProducts.popularProductList.isEmpty
                 ? 1
                 : popularProducts.popularProductList.length,
-            position: _currentPageValue,
+            position: _currentPageValue.toInt(),
             decorator: DotsDecorator(
               activeColor: AppColors.mainColor,
               size: const Size.square(9.0),
@@ -117,7 +117,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommendedFood(index));
+                        Get.toNamed(RouteHelper.getRecommendedFood(index, 'home'));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -161,7 +161,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                             .recommendedProductList[index]
                                             .name!),
                                     SmallText(
-                                        text: 'With chinese charactistics'),
+                                        text: recommendedProducts
+                                            .recommendedProductList[index]
+                                            .description!),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -226,7 +228,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           GestureDetector(
             onTap: () {
-              Get.toNamed(RouteHelper.getPopularFood(index));
+              Get.toNamed(RouteHelper.getPopularFood(index, 'home'));
             },
             child: Container(
               height: Dimensions.calc(220),
