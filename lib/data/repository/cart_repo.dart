@@ -18,7 +18,6 @@ class CartRepo {
     // sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
     var time = DateTime.now().toString();
     cart = [];
-    
 
     /* convert map to string because sharedpreferences only accept string */
     cartList.forEach((element) {
@@ -60,17 +59,20 @@ class CartRepo {
     }
     for (var element in cart) {
       cartHistory.add(element);
-      print(element);
     }
     removeCart();
     sharedPreferences.setStringList(
         AppConstants.CART_HISTORY_LIST, cartHistory);
-    print("the length of carthistorylist is " +
-        getCartHistoryList().length.toString());
   }
 
   void removeCart() {
     cart = [];
     sharedPreferences.remove(AppConstants.CART_LIST);
+  }
+
+  void clearCartHistory() {
+    removeCart();
+    cartHistory = [];
+    sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/pages/account/account_page.dart';
+import 'package:food_delivery/pages/auth/sign_up_page.dart';
+import 'package:food_delivery/pages/cart/cart_history.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/utils/colors.dart';
 
@@ -17,9 +20,9 @@ class _HomePageState extends State<HomePage> {
 
   List pages = [
     MainFoodPage(),
-    Container(child: Center(child: Text("Next page"))),
-    Container(child: Center(child: Text("Next next page"))),
-    Container(child: Center(child: Text("Next next next page"))),
+    Container(),
+    CartHistory(),
+    AccountPage(),
   ];
 
   void onTapNav(int index) {
@@ -38,6 +41,7 @@ class _HomePageState extends State<HomePage> {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           currentIndex: _selectedPage,
+          
           onTap: onTapNav,
           items: const [
             BottomNavigationBarItem(

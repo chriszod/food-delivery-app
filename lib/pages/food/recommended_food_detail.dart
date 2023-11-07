@@ -43,7 +43,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       } else {
                         Get.toNamed(RouteHelper.initial);
                       }
-                    }, child: AppIcon(icon: Icons.clear)),
+                    }, child: const AppIcon(icon: Icons.clear)),
                 GetBuilder<PopularProductController>(builder: (controller) {
                   return GestureDetector(
                     onTap: () {
@@ -53,7 +53,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     },
                     child: Stack(
                       children: [
-                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        const AppIcon(icon: Icons.shopping_cart_outlined),
                         controller.totalItems >= 1
                             ? Positioned(
                                 right: 0,
